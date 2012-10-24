@@ -21,7 +21,8 @@ function new()
 	local debug = false
 	local paused = false
 	
-	function mcx:newAnim (name,imageTable,width,height, speed)
+	function mcx:newAnim (name,imageTable,width,height, speed, params)
+    local params = params or {}
 
 		-- Set up graphics
 		local g = display.newGroup()
@@ -35,6 +36,9 @@ function new()
 		local i = 1
 		while imageTable[i] do
 			animFrames[i] = display.newImageRect(imageTable[i],width,height);
+      if params.blendMode then
+        animFrames[i].blendMode = params.blendMode
+      end
 			g:insert(animFrames[i], true)
 			animLabels[i] = i -- default frame label is frame number
 			animFrames[i].isVisible = false
