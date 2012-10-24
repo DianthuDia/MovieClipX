@@ -59,6 +59,7 @@ function new()
 		local loopCount = 0
 		local remove = false
 		local dragBounds = nil
+		local onComplete = function() end
 		local dragLeft, dragTop, dragWidth, dragHeight
 	
 		-- flag to distinguish initial default case (where no sequence parameters are submitted)
@@ -94,6 +95,8 @@ function new()
 						currentFrame = currentFrame - 1
 						animFrames[currentFrame].isVisible = true
 						Runtime:removeEventListener( "enterFrame", self )
+
+            onComplete()
 
 						if (remove) then
 							-- delete self (only gets garbage collected if there are no other references)
@@ -253,6 +256,8 @@ function new()
 				if ( loop < 0 ) then loop = 0 end
 			
 				if ( params.remove and type(params.remove) == "boolean" ) then remove=params.remove end
+
+				if ( params.onComplete ) then onComplete=params.onComplete end
 				loopCount = 0
 			else
 				if (not inSequence) then
