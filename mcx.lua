@@ -59,7 +59,7 @@ function new()
 		local loopCount = 0
 		local remove = false
 		local dragBounds = nil
-		local onComplete = function() end
+		local onComplete
 		local dragLeft, dragTop, dragWidth, dragHeight
 	
 		-- flag to distinguish initial default case (where no sequence parameters are submitted)
@@ -257,7 +257,7 @@ function new()
 			
 				if ( params.remove and type(params.remove) == "boolean" ) then remove=params.remove end
 
-				if ( params.onComplete ) then onComplete=params.onComplete end
+				if ( params.onComplete ) then onComplete=params.onComplete else onComplete = function() end end
 				loopCount = 0
 			else
 				if (not inSequence) then
