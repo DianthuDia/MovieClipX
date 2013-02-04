@@ -23,6 +23,7 @@ function new()
 	
 	function mcx:newAnim (name,imageTable,width,height, speed, params)
     local params = params or {}
+    local baseDirectory = params.baseDirectory or system.ResourceDirectory
 
 		-- Set up graphics
 		local g = display.newGroup()
@@ -35,7 +36,7 @@ function new()
 
 		local i = 1
 		while imageTable[i] do
-			animFrames[i] = display.newImageRect(imageTable[i],width,height);
+			animFrames[i] = display.newImageRect(imageTable[i],baseDirectory,width,height);
       if params.blendMode then
         animFrames[i].blendMode = params.blendMode
       end
